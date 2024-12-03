@@ -44,7 +44,7 @@ function Header() {
           <Link to='/' >
             <Logo />
           </Link>
-          <h1 className='pl-5 text-[#333333] text-2xl font-bold font-roboto'>Bloggs</h1>
+          <h1 className='pl-5 text-[#333333] text-2xl font-bold font-roboto'>BloggHive</h1>
         </div>
         <div>
         <ul className='flex items-center'>

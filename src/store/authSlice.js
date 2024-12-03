@@ -23,9 +23,18 @@ const authSlice = createSlice({
             state.userData = null
             localStorage.removeItem('userData')
         },
+
+        initializeUserData : (state) => {
+            const savedUserData = localStorage.getItem("userData");
+            if (savedUserData) {
+                state.userData = JSON.parse(savedUserData); 
+                state.status = true;
+            }
+        } 
+
     }
 })
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, initializeUserData } = authSlice.actions
 
 export default authSlice.reducer

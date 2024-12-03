@@ -1,11 +1,10 @@
-import { login, logout } from './store/authSlice';
+import { initializeUserData, login, logout } from './store/authSlice';
 import React , { useEffect, useState } from 'react'
 import authService from './appwrite/auth_service'
 import { useDispatch, useSelector } from 'react-redux';
 import {Header, Footer} from './components/'
 import {Outlet} from 'react-router-dom'
 import './App.css'
-import { initializeLastPost } from './store/postSlice';
 
 function App() {
   // console.log(process.env.REACT_APP_APPWRITE_URL); // THIS IS FOR CREATE REACT APP
@@ -19,8 +18,7 @@ function App() {
   const authStatus = useSelector(state => state.auth.status)
 
   useEffect(() => {
-    // Dispatch to initialize the last post
-    dispatch(initializeLastPost());
+    dispatch(initializeUserData() )
 
     // If the user is logged in, fetch the current user data
     if (authStatus) {

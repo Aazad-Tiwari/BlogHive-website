@@ -9,7 +9,7 @@ function Footer() {
 
     <div className="flex items-center justify-center gap-6">
       <Logo height='h-24' />
-      <h1 className="text-black text-4xl font-bold font-roboto" >Bloggs</h1>
+      <h1 className="text-black text-4xl font-bold font-roboto" >BloggHive</h1>
     </div>
 
     <div>
