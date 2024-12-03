@@ -18,7 +18,6 @@ function Home() {
         appwriteService.getPosts()
             .then((posts) => {
                 if (posts) {
-                    console.log(posts);
                     setPosts(posts.documents.reverse());
                 }
             })
@@ -30,7 +29,6 @@ function Home() {
             appwriteService.getPost(lastPostFromStore)
                 .then((response) => {
                     if (response) {
-                        console.log(response);
                         setLastPost(response);
                     }
                 });
@@ -61,13 +59,10 @@ function Home() {
     }
     
 
-    const truncatedText = truncateHTML(String(lastPost.content), 250)
-    console.log(truncatedText);
+    // const truncatedText = truncateHTML(String(lastPost.content), 250)
+    // console.log(truncatedText);
 
-    
 
-    console.log(posts);
-    
 
     return (
         <div className='w-full h-full'>
@@ -94,7 +89,7 @@ function Home() {
                         <div className='absolute w-[920px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10'>
                             <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(lastPost.$createdAt)}</p>
                             <h2 className=' w-[750px] h-2 text-3xl leading-[10px] text-left tracking-[-1px] font-bold text-blog_black'>{lastPost.title}</h2>
-                            <p className='text-base text-[#666666] tracking-normal text-left leading-[150%] w-[750px] h-[70px]'>{truncatedText}</p>
+                            <p className='text-base text-[#666666] tracking-normal text-left leading-[150%] w-[750px] h-[70px]'>{ truncateHTML(String(lastPost.content), 250) }</p>
                             <button className='w-fit px-6 py-2 border-[2px] rounded-md text-blog_blue font-semibold border-blog_blue'> <Link to={`/post/${lastPost.$id}`} >Read More</Link> </button>
                         </div>
                     </div>
