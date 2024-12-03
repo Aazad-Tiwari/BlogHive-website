@@ -20,7 +20,6 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
     const lastPost = useSelector(state => state.posts.lastPost)
     const distpatch = useDispatch()
-    console.log(userData);
     
     const submit = async (data) => {
         if (post) {

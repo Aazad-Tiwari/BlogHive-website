@@ -11,6 +11,9 @@ function App() {
   // console.log(process.env.REACT_APP_APPWRITE_URL); // THIS IS FOR CREATE REACT APP
   // console.log(import.meta.env.VITE_APPWRITE_URL);  // FOR VITE
 
+  console.log(import.meta.env.VITE_API_KEY);
+  
+
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch()
 

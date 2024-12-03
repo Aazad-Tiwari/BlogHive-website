@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { PostCard } from '../components'
+import { PostCard, Subscribe } from '../components'
 import appwriteService from '../appwrite/configuration'
 import { useSelector } from 'react-redux'
 import upper from '../assets/upper.png'
@@ -19,7 +19,7 @@ function Home() {
             .then((posts) => {
                 if (posts) {
                     console.log(posts);
-                    setPosts(posts.documents)
+                    setPosts(posts.documents.reverse());
                 }
             })
     }, [])
@@ -64,6 +64,7 @@ function Home() {
     const truncatedText = truncateHTML(String(lastPost.content), 250)
     console.log(truncatedText);
 
+    
 
     console.log(posts);
     
@@ -102,20 +103,18 @@ function Home() {
 
             {userData && lastPost ?  
                 <div className='relative max-w-[1234px] mx-auto grid grid-cols-3 gap-5 items-center justify-center gap-y-14 mt-14'>
-                    {posts.map((post) => (
+                    {posts.map((post, index) => (
+                        index < 6 ?
                         <div key={post.$id} className=' mx-auto rounded-lg'>
                             <PostCard {...post} time={formatDateString(post.$createdAt)} truncatedContent={truncateHTML(post.content,250)} />
                         </div>
+                        : null
                     ))}
                 </div>
              : null}
 
 
-            <div className='h-[234px] bg-blog_blue w-full overflow-hidden relative flex items-center justify-center mt-20'>
-                <img src={upper} alt="" className='absolute -top-28 -left-28' />
-                <h2 className=' text-7xl text-white font-bold leading-3 tracking-wide'>Get Your Stories Heard</h2>
-                <img src={lower} alt="" className='absolute -bottom-56 -right-28' />
-            </div>
+            <Subscribe/>
 
         </div>
     )

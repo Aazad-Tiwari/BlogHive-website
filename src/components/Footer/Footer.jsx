@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden w-full bg-white h-96 flex flex-col items-center justify-center gap-8 font-roboto">
+    <section className="relative overflow-hidden w-full bg-white flex flex-col items-center justify-center gap-8 font-roboto">
 
     <div className="flex items-center justify-center gap-6">
       <Logo height='h-24' />

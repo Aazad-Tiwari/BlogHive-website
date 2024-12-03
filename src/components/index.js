@@ -12,7 +12,8 @@ import AuthLayout from './AuthLayout'
 import Login from './Login'
 import Signup from './Signup'
 import PostForm from './post-form/PostForm'
+import Subscribe from "./subscribe";
 
 export {Header, Footer, Container, LogoutBtn,
      Logo, Input, Select,PostCard,Button, RTE,
-    AuthLayout, Login, Signup, PostForm}
+    AuthLayout, Login, Signup, PostForm, Subscribe}

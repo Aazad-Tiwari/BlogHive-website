@@ -1,6 +1,6 @@
 import React from 'react'
 import { LogoutBtn, Logo, Container } from '../index'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function Header() {
@@ -47,11 +47,11 @@ function Header() {
           <h1 className='pl-5 text-[#333333] text-2xl font-bold font-roboto'>Bloggs</h1>
         </div>
         <div>
-        <ul className='flex '>
+        <ul className='flex items-center'>
           {navItems.map((item) =>
             item.active ? (
               <li key={item.name}>
-                {item.name == "Get Started ⇛" ? <button onClick={() => navigate(item.path)} className='px-8 py-3 ml-12 font-semibold flex items-center justify-center rounded-lg text-white bg-blog_blue hover:text-gray-200 duration-300 '>{item.name}</button>  : <button onClick={() => navigate(item.path)} className='font-semibold px-8 py-3 mx-12 text-blog_black hover:text-blog_blue duration-300 '>{item.name}</button>}
+                {item.name == "Get Started ⇛" ? <NavLink to={item.path} className= { ({isActive}) => `px-8 py-3 ml-12 font-semibold flex items-center justify-center rounded-lg  ${isActive ? `text-white bg-gray-400` : `bg-blog_blue text-white`}  hover:text-gray-200 duration-300 `}>{item.name}</NavLink>  : <NavLink to={item.path} className=  { ({isActive}) => `font-semibold px-8 py-3 mx-12 hover:text-blog_blue duration-300 ${isActive ? `text-blog_blue` : `text-blog_black`} `}>{item.name}</NavLink>}
               </li>
             ) : null)}
           {authStatus && (
