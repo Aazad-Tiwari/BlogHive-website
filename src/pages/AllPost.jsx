@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { PostCard, Subscribe } from '../components'
 import appwriteService from '../appwrite/configuration'
-import { useLoaderData } from 'react-router-dom';
 
 function AllPost() {
-    // const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([])
 
-    // useEffect(() => {
-    //     appwriteService.getPosts([])
-    //         .then((post) => {
-    //             if (post) {
-    //                 setPosts(post.documents.reverse())
-    //             }
-    //         }) 
-    // }, [])
+    useEffect(() => {
+        appwriteService.getPosts([])
+            .then((post) => {
+                if (post) {
+                    setPosts(post.documents.reverse())
+                }
+            }) 
+    }, [])
 
-    const posts = useLoaderData()
 
     function truncateHTML(htmlString, maxlength) {
         const textContent = new DOMParser().parseFromString(htmlString, 'text/html').body.textContent || '';
@@ -61,8 +59,3 @@ function AllPost() {
 }
 
 export default AllPost
-
-export const loadPosts = async () => {
-   const posts = await appwriteService.getPosts()
-   return posts ? posts.documents.reverse() : []
-}
