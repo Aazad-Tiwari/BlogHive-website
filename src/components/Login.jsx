@@ -15,19 +15,19 @@ function Login() {
     const login = async (data) => {
         setError("")
         try {
-            console.log(data);
-            
+
             const session = await authService.login(data)
-            if (session) {
-                const userData = await authService.getCurrentUser()
-                if (userData) {
-                    dispatch(authLogin(userData))
-                    console.log(userData)
-                    navigate("/")
-                }
+            if (!session || session instanceof Error) {
+                throw new Error(session.message);
             }
+            const userData = await authService.getCurrentUser()
+            if (userData) {
+                dispatch(authLogin(userData))
+                navigate("/")
+            }
+
         } catch (error) {
-            setError(error.message) 
+            setError(error.message)
         }
     }
 
@@ -70,12 +70,12 @@ function Login() {
                             placeholder='Enter your password'
                             type='password'
                             {...register("password", {
-                                required : true
-                            } )}
+                                required: true
+                            })}
                         />
                         <Button
-                        type='submit'
-                        className='w-full'
+                            type='submit'
+                            className='w-full'
                         >Sign in</Button>
                     </div>
                 </form>

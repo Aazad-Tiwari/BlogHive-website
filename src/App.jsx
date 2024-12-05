@@ -24,7 +24,7 @@ function App() {
     if (authStatus) {
       const fetchCurrentUser = async () => {
         try {
-          const userData = await authService.getCurrentUser(); // Fetch user data
+          const userData = await authService.getCurrentUser(); 
           if (userData) {
             dispatch(login(userData));
             

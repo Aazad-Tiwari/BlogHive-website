@@ -18,16 +18,12 @@ function Signup() {
     setError('')
     try {
       const userData = await authService.createAccount(data)
-      if (userData) {
-        console.log(userData);
-          window.alert('Account Created Please Login')
-          navigate('/login')
-        
+      if (!userData || userData instanceof Error ) {
+        throw new Error("A user with the same id, email already exists.");
       }
+      navigate('/login')
     } catch (error) {
       setError(error.message)
-      console.log('aazad',error);
-      
     }
   }
 
