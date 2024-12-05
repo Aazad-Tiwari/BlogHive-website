@@ -1,4 +1,4 @@
-import { initializeUserData, login, logout } from './store/authSlice';
+import { login, logout, initializeUserData } from './store/authSlice';
 import React , { useEffect, useState } from 'react'
 import authService from './appwrite/auth_service'
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ function App() {
         try {
           const userData = await authService.getCurrentUser(); // Fetch user data
           if (userData) {
-            dispatch(login({userData}));
+            dispatch(login(userData));
             
           } else {
             dispatch(logout());

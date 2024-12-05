@@ -6,6 +6,7 @@ import store from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { AuthLayout } from './components/index.js'
 import {AddPost,AllPost,EditPost,Home,Signup,Post,Login} from './pages'
+import {loadPosts} from './pages/AllPost.jsx'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path : '/all-posts',
+        loader : loadPosts,
         element : (
           <AuthLayout authentication>
             <AllPost/>

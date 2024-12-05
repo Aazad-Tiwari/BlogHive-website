@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { PostCard, Subscribe } from '../components'
 import appwriteService from '../appwrite/configuration'
+import { useLoaderData } from 'react-router-dom';
 
 function AllPost() {
-    const [posts, setPosts] = useState([])
+    // const [posts, setPosts] = useState([])
 
-    useEffect(() => {
-        appwriteService.getPosts([])
-            .then((post) => {
-                if (post) {
-                    setPosts(post.documents)
-                }
-            })
-    }, [])
+    // useEffect(() => {
+    //     appwriteService.getPosts([])
+    //         .then((post) => {
+    //             if (post) {
+    //                 setPosts(post.documents.reverse())
+    //             }
+    //         }) 
+    // }, [])
+
+    const posts = useLoaderData()
 
     function truncateHTML(htmlString, maxlength) {
         const textContent = new DOMParser().parseFromString(htmlString, 'text/html').body.textContent || '';
@@ -28,14 +31,13 @@ function AllPost() {
         }).format(date);
     }
 
-    posts.reverse()
 
     return (
         <div>
             
             <div className='flex flex-col max-w-xl justify-center items-center mx-auto text-center gap-5 mb-16 mt-4'>
                 <p className='font-bold leading-[150%] tracking-[10%] text-sm text-gray-500 '>OUR BLOGS</p>
-                <h2 className='leading-[45%] text-3xl text-blog_black font-bold  '>Find our all blogs from here</h2>
+                <h2 className='leading-[45%] text-3xl text-blog_black font-bold  '>Find all our blogs here</h2>
                 <p className='leading-[150%] text-sm text-gray-500 font-[500] '>our blogs are written from very research research and well known writers writers so that  we can provide you the best blogs and articles articles for you to read them all along</p>
             </div>
 
@@ -59,3 +61,8 @@ function AllPost() {
 }
 
 export default AllPost
+
+export const loadPosts = async () => {
+   const posts = await appwriteService.getPosts()
+   return posts ? posts.documents.reverse() : []
+}

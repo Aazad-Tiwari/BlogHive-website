@@ -15,9 +15,14 @@ export default function Post() {
 
     useEffect(() => {
         if (post && userData) {
+            
             setIsAuthor(post.userId === userData.$id);
         }
     }, [post, userData]);
+    // console.log(post.userId);
+    console.log(userData);
+    
+    
     
 
     useEffect(() => {

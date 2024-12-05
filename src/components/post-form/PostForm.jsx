@@ -1,10 +1,9 @@
-import React, {useCallback, useEffect} from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import {Button, Input , Select, RTE} from '../index'
+import { Button, Input, Select, RTE } from '../index'
 import appwriteService from '../../appwrite/configuration'
 import { useNavigate } from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
-import { setLastPost, clearLastPost } from '../../store/postSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -18,9 +17,8 @@ export default function PostForm({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    const lastPost = useSelector(state => state.posts.lastPost)
-    const distpatch = useDispatch()
     
+
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
@@ -43,15 +41,10 @@ export default function PostForm({ post }) {
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
-                console.log(dbPost);
+                console.log(userData);
+                const dbPost = await appwriteService.createPost({ ...data, userId : userData.$id });
                 
-                if (dbPost.$id != lastPost?.$id) {
-                    console.log('chla', dbPost.$id);
-                    
-                    distpatch(setLastPost(dbPost.$id))
-                }
+                console.log(dbPost);
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
@@ -71,7 +64,7 @@ export default function PostForm({ post }) {
         return "";
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
                 setValue("slug", slugTransform(value.title), { shouldValidate: true });
