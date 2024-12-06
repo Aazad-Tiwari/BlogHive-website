@@ -2,7 +2,7 @@ import { login, logout, initializeUserData } from './store/authSlice';
 import React , { useEffect, useState } from 'react'
 import authService from './appwrite/auth_service'
 import { useDispatch, useSelector } from 'react-redux';
-import {Header, Footer} from './components/'
+import {Header, Footer, Loading} from './components/'
 import {Outlet} from 'react-router-dom'
 import './App.css'
 
@@ -54,7 +54,7 @@ function App() {
       <Outlet/>
       <Footer/>
     </div>
-  </div> : null
+  </div> : <Loading/>
 }
 
 export default App

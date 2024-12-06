@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { login as authLogin, login } from '../store/authSlice'
-import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth_service'
 import { useForm } from 'react-hook-form'
 import { Input, Button, Logo } from './index'
@@ -9,7 +7,6 @@ import { Input, Button, Logo } from './index'
 
 function Signup() {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
   const [error, setError] = useState('')
@@ -19,7 +16,7 @@ function Signup() {
     try {
       const userData = await authService.createAccount(data)
       if (!userData || userData instanceof Error ) {
-        throw new Error("A user with the same id, email already exists.");
+        throw new Error(userData.message);
       }
       navigate('/login')
     } catch (error) {
@@ -46,7 +43,7 @@ function Signup() {
             Login
           </Link>
         </p>
-        {error && <p className='text-red-600 mt-8 text-center'>
+        {error && <p className='text-red-600 mt-4 mb-5 text-center'>
           {error}
         </p>}
 

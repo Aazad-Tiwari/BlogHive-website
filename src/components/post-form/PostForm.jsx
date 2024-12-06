@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Input, Select, RTE } from '../index'
+import { Button, Input, Select, RTE, Loading } from '../index'
 import appwriteService from '../../appwrite/configuration'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -17,9 +17,11 @@ export default function PostForm({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
+    const [loading, setLoading] = useState(false)
     
 
     const submit = async (data) => {
+        setLoading(true)
         if (post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
@@ -33,9 +35,11 @@ export default function PostForm({ post }) {
             });
 
             if (dbPost) {
+                setLoading(false)
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
+            setLoading(true)
             const file = await appwriteService.uploadFile(data.image[0]);
 
             if (file) {
@@ -47,6 +51,7 @@ export default function PostForm({ post }) {
                 console.log(dbPost);
 
                 if (dbPost) {
+                    setLoading(false)
                     navigate(`/post/${dbPost.$id}`);
                 }
             }
@@ -74,7 +79,7 @@ export default function PostForm({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
-    return (
+    return loading ? <Loading/> : (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
                 <Input

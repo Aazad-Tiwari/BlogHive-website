@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { PostCard, Subscribe } from '../components'
+import { Loading, PostCard, Subscribe } from '../components'
 import appwriteService from '../appwrite/configuration'
 import { useSelector } from 'react-redux'
 import upper from '../assets/upper.png'
@@ -11,6 +11,8 @@ function Home() {
 
     const userData = useSelector(state => state.auth.userData)
     const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true)
+    
 
     useEffect(() => {
         appwriteService.getPosts()
@@ -20,6 +22,7 @@ function Home() {
                     console.log(posts);
                 }
             })
+            .finally( () => { setLoading(false) } )
     }, [])
 
     
@@ -53,7 +56,7 @@ function Home() {
 
 
 
-    return (
+    return loading ? <Loading/> : (
         <div className='w-full h-full'>
             <div className='relative w-full h-full max-h-[796px] bg-blog_blue flex justify-around items-center rounded-xl'>
                 <img src={upper} alt="" className='absolute -top-20 -left-12 ' />
@@ -77,7 +80,7 @@ function Home() {
                         posts.map((post, index) => (
                             index < 1 ?
                                 <div key={post.$id} className='relative w-full max-w-[1232px] h-[636px] mt-36 mx-auto rounded-xl'>
-                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" className='w-full h-[530px] object-cover  rounded-xl' />
+                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" className='w-full h-[530px] object-cover rounded-xl' />
                                     <div className='absolute w-[920px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10'>
                                         <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
                                         <h2 className=' w-[750px] h-9 text-3xl leading-[30px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>

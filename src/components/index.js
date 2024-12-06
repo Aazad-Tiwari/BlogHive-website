@@ -13,7 +13,8 @@ import Login from './Login'
 import Signup from './Signup'
 import PostForm from './post-form/PostForm'
 import Subscribe from "./Subscribe";
+import Loading from './Loading'
 
 export {Header, Footer, Container, LogoutBtn,
      Logo, Input, Select,PostCard,Button, RTE,
-    AuthLayout, Login, Signup, PostForm, Subscribe}
+    AuthLayout, Login, Signup, PostForm, Subscribe, Loading}
