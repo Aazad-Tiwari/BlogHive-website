@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import authService from '../appwrite/auth_service'
 import { useForm } from 'react-hook-form'
-import { Input, Button, Logo } from './index'
+import { Input, Button, Logo, Loading } from './index'
+import {toast} from 'react-toastify'
+
 
 
 function Signup() {
@@ -10,22 +12,29 @@ function Signup() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm()
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
 
   const create = async (data) => {
     setError('')
+    setLoading(true)
     try {
       const userData = await authService.createAccount(data)
       if (!userData || userData instanceof Error ) {
+        toast.error("Something Went Wrong")
         throw new Error(userData.message);
       }
+      setLoading(false)
+      toast.success('Account Created Please Login')
       navigate('/login')
     } catch (error) {
+      setLoading(false)
       setError(error.message)
     }
   }
 
 
-  return (
+  return loading ? <Loading/> : (
     <div className='flex items-center justify-center'>
       <div className='mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10'>
         <div className='mb-2 flex justify-center'>

@@ -85,7 +85,7 @@ export default function Post() {
                     </div>
                 )}
             </div>
-            <div className="max-w-[1100px] leading-[150%] w-full mx-auto text-justify">
+            <div className="max-w-[1100px] leading-[150%] w-full mx-auto text-center">
                 {parse(post.content)}
             </div>
         </div>

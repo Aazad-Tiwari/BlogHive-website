@@ -4,6 +4,7 @@ import { Button, Input, Select, RTE, Loading } from '../index'
 import appwriteService from '../../appwrite/configuration'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -36,6 +37,7 @@ export default function PostForm({ post }) {
 
             if (dbPost) {
                 setLoading(false)
+                toast.success('Post Updated')
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
@@ -52,6 +54,7 @@ export default function PostForm({ post }) {
 
                 if (dbPost) {
                     setLoading(false)
+                    toast.success('Post Created')
                     navigate(`/post/${dbPost.$id}`);
                 }
             }

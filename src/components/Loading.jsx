@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 
-const Loading = ({message='Please Wait'}) => {
+const Loading = ({message='Please Wait...'}) => {
 
   useEffect(() => {
     // Set the background color when the component mounts

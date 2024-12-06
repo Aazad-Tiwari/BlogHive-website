@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Header, Footer, Loading} from './components/'
 import {Outlet} from 'react-router-dom'
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   // console.log(process.env.REACT_APP_APPWRITE_URL); // THIS IS FOR CREATE REACT APP
@@ -20,7 +22,6 @@ function App() {
   useEffect(() => {
     dispatch(initializeUserData() )
 
-    // If the user is logged in, fetch the current user data
     if (authStatus) {
       const fetchCurrentUser = async () => {
         try {
@@ -32,7 +33,6 @@ function App() {
             dispatch(logout());
           }
         } catch (err) {
-          console.log('aazad bhai',err);
           dispatch(logout());
         } finally {
           setLoading(false);
@@ -53,6 +53,13 @@ function App() {
       <Header/>
       <Outlet/>
       <Footer/>
+      <ToastContainer 
+          position="top-center" 
+          autoClose={2000} 
+          hideProgressBar={false} 
+          closeOnClick 
+          pauseOnHover 
+        />
     </div>
   </div> : <Loading/>
 }

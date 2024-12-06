@@ -19,7 +19,6 @@ function Home() {
             .then((posts) => { 
                 if (posts) {
                     setPosts(posts.documents.reverse());
-                    console.log(posts);
                 }
             })
             .finally( () => { setLoading(false) } )
