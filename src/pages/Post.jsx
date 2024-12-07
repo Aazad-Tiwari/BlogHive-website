@@ -69,6 +69,7 @@ export default function Post() {
                     src={appwriteService.getFilePreview(post.featuredImage)}
                     alt={post.title}
                     className="rounded w-full"
+                    loading="lazy"
                 />
                 <h4 className="ml-24 mt-9 font-semibold border text-blog_black px-5 py-[1px] border-black/50 w-fit"> {formatPostDate(post.$createdAt)} </h4>
 

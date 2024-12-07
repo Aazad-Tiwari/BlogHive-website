@@ -58,7 +58,7 @@ function Home() {
     return loading ? <Loading/> : (
         <div className='w-full h-full'>
             <div className='relative w-full h-full max-h-[796px] bg-blog_blue flex justify-around items-center rounded-xl'>
-                <img src={upper} alt="" className='absolute -top-20 -left-12 ' />
+                <img src={upper} alt="" className='absolute -top-20 -left-12 ' loading='lazy' />
                 <div className='w-[540px] h-[444px] z-10 flex flex-col justify-between items-start'>
                     <p className='text-white font-bold leading-[150%] tracking-[10%] text-base'>Featured Post</p>
                     <h1 className='font-bold text-white leading-[66px] h-auto text-6xl font-roboto'>How AI will Change the Future</h1>
@@ -66,9 +66,9 @@ function Home() {
                     <button className='w-fit h-12 bg-white rounded-lg font-medium flex content-center text-black px-14 py-4'> <Link to='/post/ai-and-future' className='w-full '> Read More </Link> </button>
                 </div>
                 <div>
-                    <img src={rightImage} alt="" className='relative w-[550px] h-[506px] z-10' />
+                    <img src={rightImage} alt="" className='relative w-[550px] h-[506px] z-10' loading='lazy' />
                 </div>
-                <img src={lower} alt="" loading='lazy' className='absolute -bottom-10 right-0 ' />
+                <img src={lower} alt="" loading='lazy' className='absolute -bottom-10 right-0 '  />
             </div>
 
 
@@ -79,7 +79,7 @@ function Home() {
                         posts.map((post, index) => (
                             index < 1 ?
                                 <div key={post.$id} className='relative w-full max-w-[1232px] h-[636px] mt-36 mx-auto rounded-xl'>
-                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" className='w-full h-[530px] object-cover rounded-xl' />
+                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='lazy' className='w-full h-[530px] object-cover rounded-xl' />
                                     <div className='absolute w-[920px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10'>
                                         <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
                                         <h2 className=' w-[750px] h-9 text-3xl leading-[30px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>
