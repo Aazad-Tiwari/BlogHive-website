@@ -15,13 +15,15 @@ function Home() {
     
 
     useEffect(() => {
-        appwriteService.getPosts()
+        if (userData) {
+            appwriteService.getPosts()
             .then((posts) => { 
                 if (posts) {
                     setPosts(posts.documents.reverse());
                 }
             })
-            .finally( () => { setLoading(false) } )
+        }
+        setLoading(false)
     }, [])
 
     
