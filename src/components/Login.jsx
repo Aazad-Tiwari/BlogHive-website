@@ -26,9 +26,9 @@ function Login() {
             }
             const userData = await authService.getCurrentUser()
             if (userData) {
+                toast.success('Login Successful')
                 dispatch(authLogin(userData))
                 setLoading(false)
-                toast.success('Login Successful')
                 navigate("/")
             }
 

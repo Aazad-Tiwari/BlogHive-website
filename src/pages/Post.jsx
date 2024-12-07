@@ -4,6 +4,7 @@ import { Button, Loading } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import appwriteService from "../appwrite/configuration";
+import { toast } from "react-toastify";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -44,6 +45,7 @@ export default function Post() {
         appwriteService.deletePost(post.$id).then((status) => {
             if (status) {
                 appwriteService.deleteFile(post.featuredImage);
+                toast.success('deleting a post can take upto 2 minutes to reflect')
                 navigate("/all-posts");
             }
         });
