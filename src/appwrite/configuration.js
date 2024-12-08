@@ -33,7 +33,7 @@ export class Service {
             
         } catch (error) {
             console.log("Appwrite service :: createPost :: error :", error);
-            
+            return error
         }
     }
 
@@ -110,7 +110,7 @@ export class Service {
             )
         } catch (error) {
             console.log('appwrite service :: uploadFile :: error', error);
-            return false
+            return error
         }
     }
 

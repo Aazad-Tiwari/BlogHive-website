@@ -14,21 +14,49 @@ function Home() {
     const [loading, setLoading] = useState(true)
     
 
-    useEffect(() => {
+    const fetchPosts = async () => {
         if (userData) {
-            appwriteService.getPosts()
-            .then((posts) => { 
-                if (posts) {
-                    setPosts(posts.documents.reverse());
+            try {
+                setLoading(true)
+                const fetchedPosts = await appwriteService.getPosts([])
+                if (fetchedPosts) {
+                    const reversedPosts = fetchedPosts.documents.reverse()
+                    setPosts(reversedPosts)
+                    localStorage.setItem('posts', JSON.stringify(reversedPosts))
                 }
-            })
+    
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false)
+            }
         }
-        setLoading(false)
-    }, [])
+    }
 
+    useEffect(() => {
+        const checkCacheAndFetch = async () => {
+            const cachedPosts = localStorage.getItem('posts')
+            if (cachedPosts) {
+                setPosts(JSON.parse(cachedPosts))
+                setLoading(false)
+            } else {
+                await fetchPosts()
+            }
+        }
+
+        checkCacheAndFetch()
+
+    }, [])
     
 
-
+    useEffect( () => {
+        if (sessionStorage.getItem('Required')) {
+            fetchPosts();
+            sessionStorage.removeItem('Required');
+        }else{
+            sessionStorage.setItem('Required', 'true' )
+        }
+    } , [] )
 
 
     function truncateHTML(htmlString, maxlength) {
@@ -81,7 +109,7 @@ function Home() {
                         posts.map((post, index) => (
                             index < 1 ?
                                 <div key={post.$id} className='relative w-full max-w-[1232px] h-[636px] mt-36 mx-auto rounded-xl'>
-                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='lazy' className='w-full h-[530px] object-cover rounded-xl' />
+                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='eager' className='w-full h-[530px] object-cover rounded-xl' />
                                     <div className='absolute w-[920px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10'>
                                         <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
                                         <h2 className=' w-[750px] h-9 text-3xl leading-[30px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>
@@ -98,7 +126,7 @@ function Home() {
             {userData ?
                 <div className='relative max-w-[1234px] mx-auto grid grid-cols-3 gap-5 items-center justify-center gap-y-14 mt-14'>
                     {posts.map((post, index) => (
-                        index < 6 ?
+                        (index < 6 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>
                                 <PostCard {...post} time={formatDateString(post.$createdAt)} truncatedContent={truncateHTML(post.content, 250)} />
                             </div>

@@ -5,7 +5,6 @@ import appwriteService from '../appwrite/configuration'
 function AllPost() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
-    const cacheExpiry = 1000 * 60 * 2
 
 
     const fetchPosts = async () => {
@@ -16,13 +15,11 @@ function AllPost() {
             if (fetchedPosts) {
                 const reversedPosts = fetchedPosts.documents.reverse()
                 setPosts(reversedPosts)
-
                 localStorage.setItem('posts', JSON.stringify(reversedPosts))
-                localStorage.setItem('posts-timestamp', Date.now().toString())
             }
 
         } catch (error) {
-            console.log('allpost line num 25', error);
+            console.error(error);
         } finally {
             setLoading(false)
         }
@@ -32,9 +29,7 @@ function AllPost() {
     useEffect(() => {
         const checkCacheAndFetch = async () => {
             const cachedPosts = localStorage.getItem('posts')
-            const cachedTime = localStorage.getItem('posts-timestamp')
-
-            if (cachedPosts && cachedTime && Date.now() - parseInt(cachedTime, 10) < cacheExpiry) {
+            if (cachedPosts) {
                 setPosts(JSON.parse(cachedPosts))
                 setLoading(false)
             } else {
@@ -44,14 +39,17 @@ function AllPost() {
 
         checkCacheAndFetch()
 
-        const refreshInterval = setInterval(async () => {
-            await fetchPosts()
-        }, cacheExpiry);
-
-        return () => clearInterval(refreshInterval)
-
 
     }, [])
+
+    useEffect( () => {
+        if (sessionStorage.getItem('Required')) {
+            fetchPosts();
+            sessionStorage.removeItem('Required');
+        }else{
+            sessionStorage.setItem('Required', 'true' )
+        }
+    } , [] )
 
 
     function truncateHTML(htmlString, maxlength) {

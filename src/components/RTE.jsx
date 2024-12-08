@@ -4,7 +4,7 @@ import {Controller} from 'react-hook-form'
 import config from '../config/config'
 
 
-export default function RTE({ name, label, control, defaultValue = '' }) {
+function RTE({ name, label, control, defaultValue = '' }, ref) {
     
     // Function to handle image insertion
     const handleImageUpload = (editor) => {
@@ -65,3 +65,5 @@ export default function RTE({ name, label, control, defaultValue = '' }) {
       </div>
     );
   }
+
+export default React.forwardRef(RTE)
