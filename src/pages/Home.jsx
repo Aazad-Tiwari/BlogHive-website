@@ -126,7 +126,7 @@ function Home() {
             {userData ?
                 <div className='relative max-w-[1234px] mx-auto grid grid-cols-3 gap-5 items-center justify-center gap-y-14 mt-14'>
                     {posts.map((post, index) => (
-                        (index < 6 && index > 0) ?
+                        (index < 7 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>
                                 <PostCard {...post} time={formatDateString(post.$createdAt)} truncatedContent={truncateHTML(post.content, 250)} />
                             </div>
