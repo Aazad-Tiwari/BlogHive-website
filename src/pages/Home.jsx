@@ -30,6 +30,8 @@ function Home() {
             } finally {
                 setLoading(false)
             }
+        }else{
+            setLoading(false)
         }
     }
 
