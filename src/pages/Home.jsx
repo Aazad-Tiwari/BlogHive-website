@@ -125,7 +125,7 @@ function Home() {
 
 
             {userData ?
-                screen.availWidth > 768 ? <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 mt-14 px-2'>
+                screen.availWidth > 768 ? <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 xlg:gap-y-16 mt-14 px-2'>
                     {posts.map((post, index) => (
                         (index < 7 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>
