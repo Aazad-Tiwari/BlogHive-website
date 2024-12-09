@@ -48,7 +48,7 @@ function App() {
 
 
  
-  return !loading ? <div className=' flex flex-wrap content-center overflow-x-hidden' >
+  return !loading ? <div className=' flex  content-center overflow-x-hidden' >
     <div className='w-full block'>
       <Header/>
       <Outlet/>

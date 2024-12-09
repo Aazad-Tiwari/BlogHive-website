@@ -9,8 +9,6 @@ function EditPost() {
     const { slug } = useParams()
     const navigate = useNavigate()
     const userData = useSelector(state => state.auth.userData)
-    // const isAuthor = 
-    console.log(userData);
 
 
     useEffect(() => {

@@ -86,7 +86,7 @@ function Home() {
 
 
 
-    return loading ? <Loading/> : (
+    return loading ? <Loading message='Keeping you up-to-date' /> : (
         <div className='w-full h-full mx-auto overflow-x-hidden'>
             <div className='relative w-full h-full xlg:max-h-[796px] xxsm:max-h-[850px] xmd:max-h-[600px] bg-blog_blue flex xxsm:flex-col xmd:flex-row xlg:flex-row justify-around items-center rounded-xl xxsm:px-8 lg:px-0 xmd:gap-6 lg:gap-0'>
                 <img src={upper} alt="" className='absolute -top-20 -left-12 hidden xsm:w-[280px] xsm:h-full xsm:block xlg:block xlg:h-auto xlg:w-auto ' loading='lazy' />
@@ -110,11 +110,11 @@ function Home() {
                         posts.map((post, index) => (
                             index < 1 ?
                                 <div key={post.$id} className='relative w-full xl:max-w-[1232px] md:max-w-[700px] h-[636px] mt-14 mx-auto rounded-xl hidden md:block xl:block'>
-                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='eager' className='w-full h-[530px] object-cover rounded-xl' />
-                                    <div className='absolute xl:w-[920px] md:w-[610px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10 border border-black'>
-                                        <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
-                                        <h2 className=' w-[750px] h-9 text-3xl leading-[30px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>
-                                        <p className='text-base text-[#666666] tracking-normal text-left leading-[150%] w-[750px] h-[70px]'>{truncateHTML(String(post.content), 250)}</p>
+                                    <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='eager' className='w-full h-[530px] object-cover object-top rounded-xl' />
+                                    <div className='absolute xl:w-[920px] md:w-[610px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10 border border-black overflow-auto no-scrollbar'>
+                                        <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 '>{formatDateString(post.$createdAt)}</p>
+                                        <h2 className='text-3xl leading-[36px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>
+                                        <p className='text-base text-[#666666] tracking-normal text-left leading-[150%] '>{truncateHTML(String(post.content), 250)}</p>
                                         <button className='w-fit px-6 py-2 border-[2px] rounded-md text-blog_blue font-semibold border-blog_blue'> <Link to={`/post/${post.$id}`} >Read More</Link> </button>
                                     </div>
                                 </div> : null
@@ -125,7 +125,7 @@ function Home() {
 
 
             {userData ?
-                <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 mt-14 px-2'>
+                screen.availWidth > 768 ? <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 mt-14 px-2'>
                     {posts.map((post, index) => (
                         (index < 7 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>
@@ -134,7 +134,19 @@ function Home() {
                             : null
                     ))}
                 </div>
-                : null}
+                : null : null}
+
+            {userData ?
+                screen.availWidth < 768 ? <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 mt-14 px-2'>
+                    {posts.map((post, index) => (
+                        (index < 6 ) ?
+                            <div key={post.$id} className=' mx-auto rounded-lg'>
+                                <PostCard {...post} time={formatDateString(post.$createdAt)} truncatedContent={truncateHTML(post.content, 250)} />
+                            </div>
+                            : null
+                    ))}
+                </div>
+                : null : null}
 
 
             {userData ? <Subscribe /> : <Subscribe content='Please Login to read our recent blogs' />}

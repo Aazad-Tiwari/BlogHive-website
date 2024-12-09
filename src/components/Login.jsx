@@ -39,7 +39,7 @@ function Login() {
         }
     }
 
-    return loading ? <Loading/> : (
+    return loading ? <Loading message='Checking your credentials...' /> : (
         <div className='flex items-center justify-center w-full '>
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 xxsm:space-y-5 xsm:space-y-3  shadow-xl shadow-[#7b4ee47a]`} >
                 <div className='mb-2 flex justify-center'>

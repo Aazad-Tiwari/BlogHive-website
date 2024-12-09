@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import appwriteService from "../appwrite/configuration";
 import { toast } from "react-toastify";
 
+
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
@@ -60,20 +61,29 @@ export default function Post() {
         }).format(date);
     }
 
+    const contentStyle = {
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '16px',
+        lineHeight: '1.5',
+        color: '#333', // Ensure it matches the editor's text color
+        whiteSpace: 'pre-wrap',
+      };
+    
+
 
     return post && !loading ? (
         <div className="py-8">
             <div className="w-full flex flex-col justify-center mb-4 relative  ">
                 <div className="w-4/5 mb-6 text-center mx-auto text-4xl  ">
-                    <h1 className="text-4xl leading-[53px] font-bold">{post.title}</h1>
+                    <h1 className="text-4xl leading-[53px] w-[90%] mx-auto pr-2 xxsm:mt-24 sm:mt-0 font-bold">{post.title}</h1>
                 </div>
                 <img
                     src={appwriteService.getFilePreview(post.featuredImage)}
                     alt={post.title}
-                    className="rounded w-full"
+                    className="rounded w-[95%] mx-auto"
                     loading="lazy"
                 />
-                <h4 className="ml-24 mt-9 font-semibold border text-blog_black px-5 py-[1px] border-black/50 w-fit"> {formatPostDate(post.$createdAt)} </h4>
+                <h4 className="md:ml-[2.5%] xlg:ml-[6%] xxsm:mx-auto mt-9 font-semibold border text-blog_black px-5 py-[1px] border-black/50 w-fit"> {formatPostDate(post.$createdAt)} </h4>
 
                 {isAuthor && (
                     <div>
@@ -88,9 +98,9 @@ export default function Post() {
                     </div>
                 )}
             </div>
-            <div className="max-w-[1100px] leading-[150%] w-full mx-auto text-center">
+            <div className="content-display max-w-6xl leading-[150%] w-full mx-auto text-justify px-5" >
                 {parse(post.content)}
             </div>
         </div>
-    ) : <Loading/> ;
+    ) : <Loading message="Getting your post ready" /> ;
 }

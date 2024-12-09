@@ -35,8 +35,6 @@ export default function PostForm({ post }) {
                 featuredImage: file ? file.$id : undefined,
             });
 
-            console.log('update wala', dbPost);
-
 
             if (dbPost) {
                 toast.success('Post Updated')
@@ -92,7 +90,7 @@ export default function PostForm({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
-    return loading ? <Loading message='Please Wait while we creating your post' /> : (
+    return loading ? <Loading message='Please wait while we create your post' /> : (
         <form onSubmit={handleSubmit(submit)} className="flex md:flex-row xxsm:flex-col px-8 shadow-lg shadow-[#7b4ee49f] gap-8 xxsm:py-10 md:py-0 ">
             <div className="md:w-2/3 xxsm:w-full md:px-2 mx-auto ">
                 <Input
@@ -115,7 +113,7 @@ export default function PostForm({ post }) {
                 />
                 {errors.slug && <p className="text-red-500 mb-1 -mt-3">{errors.slug.message}</p>}
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} {...register('content', { required: 'Content is Required' })} />
-                {errors.content && <p className="text-red-500 top-[171px] left-20 absolute">{errors.content.message}</p>}
+                {errors.content && <p className="text-red-500 top-[212px] md:top-[172px] left-32 absolute">{errors.content.message}</p>}
             </div>
             <div className="md:w-1/3 xxsm:w-full md:px-2 mx-auto">
                 <Input

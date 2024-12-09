@@ -34,7 +34,7 @@ function Signup() {
   }
 
 
-  return loading ? <Loading /> : (
+  return loading ? <Loading message='adding a new member' /> : (
     <div className='flex items-center justify-center '>
       <div className='mx-auto w-full max-w-lg bg-gray-100 xxsm:space-y-5 xsm:space-y-3 rounded-xl p-10 border border-black/10 shadow-xl shadow-[#7b4ee49f]'>
         <div className='mb-2 flex justify-center'>
