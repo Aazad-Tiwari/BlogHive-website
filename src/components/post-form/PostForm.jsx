@@ -56,10 +56,10 @@ export default function PostForm({ post }) {
                         if ((dbPost && dbPost instanceof Error && dbPost.code == 400) || dbPost.code == 409) {
                             toast.error('add a unique slug with at most 36 characters not starting with special characters and can only contain A-Z a-z 0-9 period hyphen and underscore')
                             navigate('/add-post')
-                            throw new Error(error);
+                            throw new Error(dbPost);
 
                         }
-                        toast.success('Post Created it can take upto 2 minutes to reflect on the website')
+                        toast.success('Post Created')
                         navigate(`/post/${dbPost.$id}`);
                     } catch (error) {
                         console.log(error);
@@ -92,9 +92,9 @@ export default function PostForm({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
-    return loading ? <Loading /> : (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+    return loading ? <Loading message='Please Wait while we creating your post' /> : (
+        <form onSubmit={handleSubmit(submit)} className="flex md:flex-row xxsm:flex-col px-8 shadow-lg shadow-[#7b4ee49f] gap-8 xxsm:py-10 md:py-0 ">
+            <div className="md:w-2/3 xxsm:w-full md:px-2 mx-auto ">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -117,7 +117,7 @@ export default function PostForm({ post }) {
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} {...register('content', { required: 'Content is Required' })} />
                 {errors.content && <p className="text-red-500 top-[171px] left-20 absolute">{errors.content.message}</p>}
             </div>
-            <div className="w-1/3 px-2">
+            <div className="md:w-1/3 xxsm:w-full md:px-2 mx-auto">
                 <Input
                     label="*Featured Image: "
                     type="file"

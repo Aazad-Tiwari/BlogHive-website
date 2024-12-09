@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden w-full bg-white flex flex-col items-center justify-center gap-8 font-roboto">
+    <section className="relative overflow-hidden w-full bg-white flex flex-col items-center justify-center gap-8 mx-auto font-roboto">
 
     <div className="flex items-center justify-center gap-6">
       <Logo height='h-24' />
@@ -13,7 +13,7 @@ function Footer() {
     </div>
 
     <div>
-      <ul className="flex items-center justify-center gap-20">
+      <ul className="flex items-center justify-center gap-8 xsm:gap-20">
         <li className="text-black hover:text-blog_blue "> <Link to='/' >Home</Link> </li>
         <li className="text-black hover:text-blog_blue "><Link to='/all-posts' >Blogs</Link></li>
         <li className="text-black hover:text-blog_blue "><Link to='/add-post' >Add</Link></li>
@@ -31,7 +31,7 @@ function Footer() {
 
     <div className="w-[1250px] h-[2px] mx-auto bg-blog_blue"></div>
       
-    <div>
+    <div className="text-center">
       <p>&copy; Copyright 2024. All Rights Reserved by DevUI.</p>
     </div>
 

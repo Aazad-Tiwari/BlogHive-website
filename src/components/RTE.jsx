@@ -55,7 +55,7 @@ function RTE({ name, label, control, defaultValue = '' }, ref) {
                     onAction: () => handleImageUpload(editor),
                   });
                 },
-                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:4px }"
                 
               }}
               onEditorChange={onChange}

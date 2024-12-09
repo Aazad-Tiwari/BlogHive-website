@@ -12,7 +12,6 @@ function Home() {
     const userData = useSelector(state => state.auth.userData)
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
-    
 
     const fetchPosts = async () => {
         if (userData) {
@@ -88,19 +87,19 @@ function Home() {
 
 
     return loading ? <Loading/> : (
-        <div className='w-full h-full'>
-            <div className='relative w-full h-full max-h-[796px] bg-blog_blue flex justify-around items-center rounded-xl'>
-                <img src={upper} alt="" className='absolute -top-20 -left-12 ' loading='lazy' />
-                <div className='w-[540px] h-[444px] z-10 flex flex-col justify-between items-start'>
+        <div className='w-full h-full mx-auto overflow-x-hidden'>
+            <div className='relative w-full h-full xlg:max-h-[796px] xxsm:max-h-[850px] xmd:max-h-[600px] bg-blog_blue flex xxsm:flex-col xmd:flex-row xlg:flex-row justify-around items-center rounded-xl xxsm:px-8 lg:px-0 xmd:gap-6 lg:gap-0'>
+                <img src={upper} alt="" className='absolute -top-20 -left-12 hidden xsm:w-[280px] xsm:h-full xsm:block xlg:block xlg:h-auto xlg:w-auto ' loading='lazy' />
+                <div className='xlg:w-[540px] xlg:h-[444px] z-10 flex flex-col xxsm:gap-5 xxsm:text-center xmd:text-left xlg:gap-0 justify-between xmd:w-[450px] xmd:h-[355px]'>
                     <p className='text-white font-bold leading-[150%] tracking-[10%] text-base'>Featured Post</p>
-                    <h1 className='font-bold text-white leading-[66px] h-auto text-6xl font-roboto'>How AI will Change the Future</h1>
+                    <h1 className='font-bold text-white xmd:leading-[66px] xxsm:[20px] h-auto xxsm:text-4xl xmd:text-6xl font-roboto'>How AI will Change the Future</h1>
                     <p className='text-base text-white h-auto leading-[150%] '>The future of AI will see home robots having enhanced intelligence, increased capabilities, and becoming more personal and possibly cute. For example, home robots will overcome navigation, direction</p>
-                    <button className='w-fit h-12 bg-white rounded-lg font-medium flex content-center text-black px-14 py-4'> <Link to='/post/ai-and-future' className='w-full '> Read More </Link> </button>
+                    <button className='w-fit h-12 bg-white rounded-lg font-medium flex items-center text-black px-14 py-4 xmd:mx-0 xxsm:mx-auto'> <Link to='/post/ai-and-future' className='w-full '> Read More </Link> </button>
                 </div>
                 <div>
-                    <img src={rightImage} alt="" className='relative w-[550px] h-[506px] z-10' loading='lazy' />
+                    <img src={rightImage} alt="" className='relative xlg:w-[550px] xlg:h-[506px] z-10 xmd:w-[400px] xmd:h-[355px] xxsm:w-[520px] xxsm:h-[380px] object-cover rounded-lg ' loading='lazy' />
                 </div>
-                <img src={lower} alt="" loading='lazy' className='absolute -bottom-10 right-0 '  />
+                <img src={lower} alt="" loading='lazy' className='absolute -bottom-10 right-0 hidden xlg:block'  />
             </div>
 
 
@@ -110,9 +109,9 @@ function Home() {
                     {
                         posts.map((post, index) => (
                             index < 1 ?
-                                <div key={post.$id} className='relative w-full max-w-[1232px] h-[636px] mt-36 mx-auto rounded-xl'>
+                                <div key={post.$id} className='relative w-full xl:max-w-[1232px] md:max-w-[700px] h-[636px] mt-36 mx-auto rounded-xl hidden md:block xl:block'>
                                     <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='eager' className='w-full h-[530px] object-cover rounded-xl' />
-                                    <div className='absolute w-[920px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10'>
+                                    <div className='absolute xl:w-[920px] md:w-[610px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10 border border-black'>
                                         <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
                                         <h2 className=' w-[750px] h-9 text-3xl leading-[30px] text-left tracking-[-1px] font-bold text-blog_black'>{post.title}</h2>
                                         <p className='text-base text-[#666666] tracking-normal text-left leading-[150%] w-[750px] h-[70px]'>{truncateHTML(String(post.content), 250)}</p>
@@ -126,7 +125,7 @@ function Home() {
 
 
             {userData ?
-                <div className='relative max-w-[1234px] mx-auto grid grid-cols-3 gap-5 items-center justify-center gap-y-14 mt-14'>
+                <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 xxsm:mt-36 md:mt-14 px-2'>
                     {posts.map((post, index) => (
                         (index < 7 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>
@@ -142,8 +141,6 @@ function Home() {
 
         </div>
     )
-
-
 }
 
 export default Home

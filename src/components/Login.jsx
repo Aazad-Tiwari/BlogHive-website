@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState : {errors} } = useForm()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
 
@@ -40,8 +40,8 @@ function Login() {
     }
 
     return loading ? <Loading/> : (
-        <div className='flex items-center justify-center w-full'>
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`} >
+        <div className='flex items-center justify-center w-full '>
+            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 xxsm:space-y-5 xsm:space-y-3  shadow-xl shadow-[#7b4ee47a]`} >
                 <div className='mb-2 flex justify-center'>
                     <span className='w-full justify-center items-center flex '>
                         <Logo />
@@ -67,20 +67,22 @@ function Login() {
                             placeholder='Enter your email'
                             type='email'
                             {...register("email", {
-                                required: true,
+                                required: 'email is required',
                                 validate: {
                                     matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email must be a valid address"
                                 }
                             })}
                         />
+                        {errors.email && <p className="text-red-500 mb-1 -mt-3">{errors.email.message}</p>}
                         <Input
                             label='Password:'
                             placeholder='Enter your password'
                             type='password'
                             {...register("password", {
-                                required: true
+                                required: 'password is required'
                             })}
                         />
+                        {errors.password && <p className="text-red-500 mb-1 -mt-3">{errors.password.message}</p>}
                         <Button
                             type='submit'
                             className='w-full'

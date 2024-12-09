@@ -14,9 +14,8 @@ const Loading = ({message='Please Wait...'}) => {
   }, []);
 
   return (
-    <div className=' h-screen relative z-50 '>
-    <h1 className='text-7xl text-white font-bold shadow-md text-center mx-auto absolute bottom-40 left-1/3 '> {message} </h1>
-      <svg viewBox="0 0 100 100" className=' relative top-1/2 left-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 '>
+    <div className=' h-screen relative z-50 flex justify-center items-center flex-col'>
+      <svg viewBox="0 0 100 100" className=' relative h-36 w-36'>
         <g fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="6">
           {/* Left line */}
           <path d="M 21 40 V 59">
@@ -88,6 +87,8 @@ const Loading = ({message='Please Wait...'}) => {
           />
         </g>
       </svg>
+    <h1 className='text-7xl text-white font-bold shadow-md text-center mx-auto  '> {message} </h1>
+
     </div>
   );
 };

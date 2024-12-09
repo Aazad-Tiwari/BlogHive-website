@@ -66,16 +66,16 @@ function AllPost() {
         }).format(date);
     }
 
-    return loading ? (<Loading />) :
+    return loading ? (<Loading message='Getting new posts for you' />) :
         (
             <div>
                 <div className='flex flex-col max-w-xl justify-center items-center mx-auto text-center gap-5 mb-16 mt-4'>
                     <p className='font-bold leading-[150%] tracking-[10%] text-sm text-gray-500 animate-pulse'>OUR BLOGS</p>
                     <h2 className='leading-[45%] text-3xl text-blog_black font-bold  '>Find all our blogs here</h2>
-                    <p className='leading-[150%] text-sm text-gray-500 font-[500] '>our blogs are written with research research and by well known writers so we can provide you the best blogs and articles to read them all along</p>
+                    <p className='leading-[150%] text-sm text-gray-500 font-[500] '>our blogs are written with research and by well known writers so we can provide you the best blogs and articles to read them all along</p>
                 </div>
 
-                <div className='relative max-w-[1234px] mx-auto grid grid-cols-3 gap-5 items-center justify-center border mt-14 gap-y-16'>
+                <div className='relative max-w-[1234px] mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 gap-5 items-center justify-center border mt-14 gap-y-16'>
                     {posts.map((post) => {
                         const postDate = formatPostDate(post.$createdAt)
                         const truncatedContent = truncateHTML(post.content, 250)
