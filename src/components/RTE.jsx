@@ -4,7 +4,7 @@ import {Controller} from 'react-hook-form'
 import config from '../config/config'
 
 
-function RTE({ name, label, control, defaultValue = '' }, ref) {
+function RTE({ name, label, control, defaultValue = '', placeholder = 'Every detail matters. Shape your content beautifully—it’s your canvas...' }, ref) {
     
     // Function to handle image insertion
     const handleImageUpload = (editor) => {
@@ -55,7 +55,8 @@ function RTE({ name, label, control, defaultValue = '' }, ref) {
                     onAction: () => handleImageUpload(editor),
                   });
                 },
-                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:4px }"
+                placeholder,
+                content_style: "body { font-family:roboto; font-size:16px }"
                 
               }}
               onEditorChange={onChange}

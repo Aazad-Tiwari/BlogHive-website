@@ -105,11 +105,11 @@ function Home() {
 
             {userData ?
                 <>
-                    <h1 className='text-4xl font-bold text-blog_black absolute mt-20 ml-10 underline'>Our Recent Posts</h1>
+                    <h1 className='text-4xl font-bold text-blog_black relative mt-20 xsm:ml-10 underline text-center xsm:text-left'>Our Recent Posts</h1>
                     {
                         posts.map((post, index) => (
                             index < 1 ?
-                                <div key={post.$id} className='relative w-full xl:max-w-[1232px] md:max-w-[700px] h-[636px] mt-36 mx-auto rounded-xl hidden md:block xl:block'>
+                                <div key={post.$id} className='relative w-full xl:max-w-[1232px] md:max-w-[700px] h-[636px] mt-14 mx-auto rounded-xl hidden md:block xl:block'>
                                     <img src={post?.featuredImage ? appwriteService.getFilePreview(post.featuredImage) : null} alt="" loading='eager' className='w-full h-[530px] object-cover rounded-xl' />
                                     <div className='absolute xl:w-[920px] md:w-[610px] h-[320px] bottom-0 right-0 rounded-lg bg-white shadow flex flex-col justify-around pl-10 border border-black'>
                                         <p className=' leading-[150%] text-sm font-medium text-[#999999] w-32 h-1  '>{formatDateString(post.$createdAt)}</p>
@@ -125,7 +125,7 @@ function Home() {
 
 
             {userData ?
-                <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 xxsm:mt-36 md:mt-14 px-2'>
+                <div className='relative max-w-[1234px] w-full mx-auto grid xl:grid-cols-3 xmd:grid-cols-2 xlg:gap-5 gap-3 items-center justify-center gap-y-14 mt-14 px-2'>
                     {posts.map((post, index) => (
                         (index < 7 && index > 0) ?
                             <div key={post.$id} className=' mx-auto rounded-lg'>

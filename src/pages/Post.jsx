@@ -76,13 +76,13 @@ export default function Post() {
                 <h4 className="ml-24 mt-9 font-semibold border text-blog_black px-5 py-[1px] border-black/50 w-fit"> {formatPostDate(post.$createdAt)} </h4>
 
                 {isAuthor && (
-                    <div className="absolute right-6 top-6">
+                    <div>
                         <Link to={`/edit-post/${post.$id}`}>
-                            <Button bgColor="bg-green-500" className="mr-3">
+                            <Button bgColor="bg-green-500/90" className="mr-3 absolute left-4 top-0 hover:bg-green-500">
                                 Edit
                             </Button>
                         </Link>
-                        <Button bgColor="bg-red-500" onClick={deletePost}>
+                        <Button bgColor="bg-red-500/90" className="mr-3 absolute right-4 top-0 hover:bg-red-500" onClick={deletePost}>
                             Delete
                         </Button>
                     </div>
