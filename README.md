@@ -2,7 +2,7 @@
 
 Welcome to **Blog Hive**, a modern blog platform where technology meets creativity. Designed with a focus on performance, responsiveness, and usability, Blog Hive is powered by some of the most cutting-edge tools in web development.
 
-[Open Blog Hive](blog-hive-xv.vercel.app)
+<a href="https://blog-hive-xv.vercel.app/" target="_blank">Open Blog Hive</a>
 
 ## Features
 
