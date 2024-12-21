@@ -2,6 +2,8 @@
 
 Welcome to **Blog Hive**, a modern blog platform where technology meets creativity. Designed with a focus on performance, responsiveness, and usability, Blog Hive is powered by some of the most cutting-edge tools in web development.
 
+[Open Blog Hive](blog-hive-xv.vercel.app)
+
 ## Features
 
 - **User Authentication**: Powered by Appwrite for secure login and logout.
